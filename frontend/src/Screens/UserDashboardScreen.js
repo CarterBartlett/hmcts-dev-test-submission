@@ -4,7 +4,7 @@ import { Button } from '@mui/material';
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 
 export default function UserDashboardScreen() {
-  const handleLogoutAttempt = async () => {
+  const handleLogoutAttempt = async (props) => {
     try {
       const res = await fetch(`${BACKEND_URL}/auth/logout`, {
         method: 'POST',
