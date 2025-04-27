@@ -1,23 +1,41 @@
-import logo from './logo.svg';
-import './App.css';
+import {useEffect, useState} from 'react';
+import axios from 'axios';
+
+import SignInScreen from './Screens/SignInScreen';
+import UserDashboardScreen from './Screens/UserDashboardScreen';
+
+const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 
 function App() {
+  const [user, setUser] = useState(null);
+  const [appState, setAppState] = useState({
+    loading: true
+  });
+  const setAppLoading = (loadState) => {setAppState({...appState, loading: loadState})};
+
+  useEffect(()=>{
+    console.info('App mounted');
+    fetchUser();
+  }, [])
+
+  async function fetchUser() {
+    try {
+      const res = await axios.get(`${BACKEND_URL}/auth/user`, {withCredentials: true});
+      setUser(res.data);
+      console.log('User: ', res.data);
+      setAppLoading(false);
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {user ?
+        <UserDashboardScreen auth={{user}} onUserLogout={()=>setUser(null)} />
+      :
+        <SignInScreen onUserLogin={newUser=>setUser(newUser)}/>
+      }
     </div>
   );
 }

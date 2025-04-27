@@ -7,7 +7,7 @@ const User = require('../models/user');
 const localStrategy = new LocalStrategy(
     async (username, password, done) => {
         try {
-            const user = await User.findOne({username: username});
+            const user = await User.findOne({username: {$regex: username, $options: 'i'}});
             if (!user) return done(null, false); // User not found
             if (!await user.verifyPassword(password)) {
                 console.debug('Password incorrect');

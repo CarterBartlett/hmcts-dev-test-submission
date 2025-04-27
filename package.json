@@ -8,7 +8,7 @@
     "start": "npm run start:backend",
     "start--dev": "concurrently -n \"FRONT,BACK\" -c \"blue,red\" \"npm run start:frontend--dev\" \"npm run start:backend--dev\"",
     "start:frontend--dev": "cd ./frontend && npm install && npm start",
-    "start:backend--dev": "cd ./backend && npm install && npm run start--dev"
+    "start:backend--dev": "cd ./backend && npm install --legacy-peer-deps && npm run start--dev"
   },
   "repository": {
     "type": "git",

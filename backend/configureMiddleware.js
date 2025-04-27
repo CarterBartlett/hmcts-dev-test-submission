@@ -5,6 +5,7 @@ var logger = require('morgan');
 const MongoStore = require('connect-mongo');
 const session = require('express-session');
 const passport = require('passport');
+const cors = require('cors');
 
 module.exports = async app => {
   console.info('Configuring middleware...');
@@ -30,7 +31,10 @@ module.exports = async app => {
     },
     resave: false,
     proxy: true
-}));
+  }));
+
+  console.info('Mounting CORS middleware...');
+  app.use(cors({credentials: true, origin: true}));
 
   console.info('Setting up Passport service...');
   app.use(passport.initialize());
