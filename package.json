@@ -1,0 +1,26 @@
+{
+  "name": "hmcts-dev-test-submission",
+  "version": "1.0.0",
+  "description": "Submission for Carter Bartlett for the role of Junior Software Developer",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "npm run start:backend",
+    "start--dev": "concurrently -n \"FRONT,BACK\" -c \"blue,red\" \"npm run start:frontend--dev\" \"npm run start:backend--dev\"",
+    "start:frontend--dev": "cd ./frontend && npm install && npm start",
+    "start:backend--dev": "cd ./backend && npm install && npm run start--dev"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CarterBartlett/hmcts-dev-test-submission.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/CarterBartlett/hmcts-dev-test-submission/issues"
+  },
+  "homepage": "https://github.com/CarterBartlett/hmcts-dev-test-submission#readme",
+  "devDependencies": {
+    "concurrently": "^9.1.2"
+  }
+}
