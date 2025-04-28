@@ -10,7 +10,7 @@ export default function SignInScreen(props) {
   const [errorMessage, setErrorMessage] = useState('');
 
   const clearFields = () => {
-    setCandidateUsername('');
+    //setCandidateUsername('');
     setCandidatePassword('');
     setErrorMessage('');
   }
